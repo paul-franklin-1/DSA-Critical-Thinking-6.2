@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 
 public class CustomLinkedList {
     private Node head;
-
+//change
     public void insert(int data){
     }
     public void delete(int data) {
