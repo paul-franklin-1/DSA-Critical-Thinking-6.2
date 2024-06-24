@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -33,11 +36,26 @@ public class CustomLinkedList {
             current = current.next;
         }
         System.out.println("This value was not found in the list. No value deleted.");
-        return;
     }
 
     public Iterator<Integer> iterator() {
         return new LinkedListIterator();
+    }
+
+    public void fileReadIntegers(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    int data = Integer.parseInt(line.trim());
+                    insert(data);
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid integer format in file: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
     }
 
     private class Node {
